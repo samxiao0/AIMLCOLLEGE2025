@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our College</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="timetable.html">Timetable</a></li> -->
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card">
+            <h2>About Our College</h2>
+            <p>Our college offers a variety of programs and courses to help students achieve their academic goals. We are committed to providing a supportive and enriching environment for all students.</p>
+        </section>
+        <section class="card" id="timetable-section">
+            <h2>Timetable</h2>
+            <label for="day-select"><strong>Select Day:</strong></label>
+            <select id="day-select">
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+            <table class="table" id="timetable-table">
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Time</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Timetable rows will be inserted here by JS -->
+                </tbody>
+            </table>
+        </section>
+        <section class="card">
+            <h2>Latest News</h2>
+            <ul class="news-list">
+                <li>Admissions for Fall 2025 are now open!</li>
+                <li>New research labs inaugurated in the Science Block.</li>
+                <li>Annual Sports Meet scheduled for August 10th.</li>
+            </ul>
+        </section>
+    </main>
+    <section class="card" id="gallery-section">
+        <h2>Gallery</h2>
+        <div id="gallery-grid"></div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Our College. All rights reserved.</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
