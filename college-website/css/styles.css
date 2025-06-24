@@ -1,5 +1,25 @@
 /* Copied from src/css/styles.css. Update links in HTML to use css/styles.css */
 
+/* Anime-inspired pastel color palette */
+:root {
+    --primary-bg: #f7f6fd;
+    --primary-accent: #a7c7e7;
+    --secondary-accent: #f7b2ad;
+    --header-bg: #7f8fff;
+    --header-text: #fff;
+    --nav-bg: #b8b5ff;
+    --nav-hover: #f7b2ad;
+    --card-bg: #fff6f6;
+    --card-shadow: #e0e7ff;
+    --gallery-bg: #f7f6fd;
+    --gallery-img-bg: #e0e7ff;
+    --gallery-img-shadow: #b8b5ff;
+    --footer-bg: #b8b5ff;
+    --footer-text: #fff;
+    --heading: #7f8fff;
+    --text: #444;
+}
+
 html, body {
     height: 100%;
     width: 100vw;
@@ -7,6 +27,8 @@ html, body {
     padding: 0;
     overflow-x: hidden;
     box-sizing: border-box;
+    background: var(--primary-bg);
+    color: var(--text);
 }
 *, *::before, *::after {
     box-sizing: inherit;
@@ -20,8 +42,8 @@ body {
 }
 
 header {
-    background: #003366;
-    color: #ffffff;
+    background: var(--header-bg);
+    color: var(--header-text);
     padding: 1em;
     text-align: center;
 }
@@ -32,7 +54,7 @@ nav {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    background: #002244;
+    background: var(--nav-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-radius: 8px;
     margin-top: 20px;
@@ -62,7 +84,7 @@ nav li {
 }
 
 nav a {
-    color: #ffffff;
+    color: var(--header-text);
     text-decoration: none;
     padding: 12px 24px;
     border-radius: 0;
@@ -75,8 +97,8 @@ nav a {
 }
 
 nav a:hover, nav a:focus {
-    background: #e8491d;
-    color: #fff;
+    background: var(--nav-hover);
+    color: var(--header-text);
     box-shadow: 0 2px 8px rgba(232,73,29,0.15);
     outline: none;
 }
@@ -96,8 +118,8 @@ main {
 
 footer {
     flex-shrink: 0;
-    background: #003366;
-    color: #ffffff;
+    background: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 1em;
     width: 100%;
@@ -106,13 +128,13 @@ footer {
 }
 
 h1, h2, h3 {
-    color: #35424a;
+    color: rgb(5, 69, 247);
 }
 
 .card {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 12px var(--card-shadow);
     padding: 2em 1.5em;
     margin: 2em auto;
     max-width: 700px;
@@ -252,7 +274,7 @@ h1, h2, h3 {
 #gallery-section {
     margin: 2em auto 2em auto;
     max-width: 900px;
-    background: linear-gradient(135deg, #f9fafc 60%, #e6ecf5 100%);
+    background: var(--gallery-bg);
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     padding: 2em 1.5em;
@@ -265,7 +287,7 @@ h1, h2, h3 {
 }
 #gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
     gap: 1.2em;
     margin-top: 1em;
     justify-items: center;
@@ -276,13 +298,57 @@ h1, h2, h3 {
     height: 120px;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    transition: transform 0.2s, box-shadow 0.2s;
-    background: #e6ecf5;
+    box-shadow: 0 2px 8px var(--gallery-img-shadow);
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s, filter 0.3s;
+    background: var(--gallery-img-bg);
+    will-change: transform, box-shadow, filter;
+    perspective: 600px;
+    cursor: pointer;
 }
 .gallery-img:hover {
-    transform: scale(1.06);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+    transform: scale(1.08) rotateY(12deg) rotateX(6deg) skew(-2deg, 1deg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 1.5px 8px rgba(0,0,0,0.10);
+    filter: brightness(1.08) saturate(1.2);
+    z-index: 2;
+}
+/* Modal styles */
+#gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+#gallery-modal.active {
+    display: flex;
+}
+#gallery-modal img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    background: #fff;
+}
+#gallery-modal .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 2.5em;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.2s;
+}
+#gallery-modal .close-btn:hover {
+    color: #e8491d;
 }
 @media (max-width: 600px) {
     #gallery-section {
@@ -295,4 +361,192 @@ h1, h2, h3 {
         max-width: 100px;
         height: 70px;
     }
+    #gallery-modal img {
+        max-width: 98vw;
+        max-height: 60vh;
+    }
+}
+
+/* --- Resource List Enhancements --- */
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+    padding-left: 0;
+    margin: 1.5em 0 0 0;
+    list-style: none;
+}
+.resource-list li {
+    background: var(--primary-accent);
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--gallery-img-shadow);
+    padding: 1.1em 1.7em;
+    font-size: 1.13em;
+    font-weight: 500;
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+}
+.resource-list li:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 6px 18px var(--nav-bg);
+    background: var(--secondary-accent);
+}
+.resource-list a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: color 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.resource-list a:hover {
+    color: var(--header-bg);
+    text-decoration: underline;
+}
+.resource-icon {
+    font-size: 1.3em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    opacity: 0.85;
+}
+@media (max-width: 600px) {
+    .resource-list li {
+        font-size: 0.98em;
+        padding: 0.7em 0.7em;
+    }
+}
+
+/* --- Contact Form Styles --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px var(--gallery-img-shadow);
+    padding: 2em 1.5em;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.contact-form label {
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.2em;
+}
+.contact-form input,
+.contact-form textarea {
+    border: 1.5px solid var(--primary-accent);
+    border-radius: 7px;
+    padding: 0.7em 1em;
+    font-size: 1em;
+    background: #fff;
+    color: var(--text);
+    margin-bottom: 0.5em;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border: 1.5px solid var(--header-bg);
+    outline: none;
+    box-shadow: 0 2px 8px var(--primary-accent);
+}
+.contact-form button[type="submit"] {
+    background: var(--header-bg);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 0.8em 1.5em;
+    font-size: 1.08em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--gallery-img-shadow);
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-top: 0.5em;
+}
+.contact-form button[type="submit"]:hover {
+    background: var(--primary-accent);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--header-bg);
+}
+@media (max-width: 600px) {
+    .contact-form {
+        padding: 1em 0.5em;
+        max-width: 98vw;
+    }
+}
+
+/* --- Countdown Section Styles --- */
+#countdown-section {
+    background: var(--card-bg);
+    box-shadow: 0 2px 12px var(--card-shadow);
+    border-radius: 12px;
+    margin-bottom: 2em;
+    padding: 1.5em 1em;
+    transition: box-shadow 0.2s;
+}
+#countdown-section:hover {
+    box-shadow: 0 4px 24px var(--gallery-img-shadow);
+}
+#countdown-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+    margin-bottom: 1em;
+}
+#countdown-form label {
+    color: var(--heading);
+    font-weight: bold;
+}
+#countdown-form input[type="text"],
+#countdown-form input[type="date"],
+#countdown-form input[type="password"] {
+    padding: 0.3em 0.7em;
+    border: 1px solid var(--primary-accent);
+    border-radius: 6px;
+    font-size: 1em;
+    background: #fff;
+    color: var(--heading);
+}
+#countdown-form button {
+    background: var(--primary-accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4em 1.2em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#countdown-form button:hover {
+    background: var(--heading);
+}
+#countdown-title {
+    color: #7f8fff;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: color 0.2s, text-shadow 0.2s;
+    text-shadow: 0 2px 8px #e0e7ff;
+}
+#countdown-title:hover {
+    color: #4a6cff;
+    text-shadow: 0 4px 16px #b8b5ff;
+}
+#countdown-timer {
+    color: #7f8fff;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0.5em;
+    letter-spacing: 2px;
 }

@@ -8,7 +8,8 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Our College</h1>
+        <h1>Welcome to AIML 2023-2027</h1>
+        <div id="liveClock" style="font-size:1.1em; color:#fff; margin-top:0.3em;"></div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -18,10 +19,25 @@
             </ul>
         </nav>
     </header>
+    <!-- Countdown Section -->
+    <section id="countdown-section" class="card" style="max-width: 500px; margin: 1.5em auto; text-align: center;">
+        <form id="countdown-form" style="margin-bottom: 1em;">
+            <label for="countdown-title-input"><strong>Countdown Title:</strong></label>
+            <input type="text" id="countdown-title-input" name="countdown-title" placeholder="e.g. Semester End" required style="margin: 0 0.5em;">
+            <label for="countdown-date"><strong>Target Date:</strong></label>
+            <input type="date" id="countdown-date" name="countdown-date" required style="margin: 0 0.5em;">
+            <div style="width:100%;height:0;"></div>
+            <label for="countdown-password" style="display:block;margin-top:0.75em;"><strong>Password:</strong></label>
+            <input type="password" id="countdown-password" name="countdown-password" placeholder="Enter password" required style="margin: 0 0.5em;display:block;">
+            <button type="submit" style="margin-top:0.5em;">Set Countdown</button>
+        </form>
+        <h2 id="countdown-title">Countdown to Semester End</h2>
+        <div id="countdown-timer" style="font-size: 1.5em; font-weight: bold; color: var(--heading);"></div>
+    </section>
     <main>
         <section class="card">
-            <h2>About Our College</h2>
-            <p>Our college offers a variety of programs and courses to help students achieve their academic goals. We are committed to providing a supportive and enriching environment for all students.</p>
+            <h2>FIFTH SEMESTER</h2>
+            <p>This website is for helping my fellow classmates.</p>
         </section>
         <section class="card" id="timetable-section">
             <h2>Timetable</h2>
@@ -47,21 +63,15 @@
                 </tbody>
             </table>
         </section>
-        <section class="card">
-            <h2>Latest News</h2>
-            <ul class="news-list">
-                <li>Admissions for Fall 2025 are now open!</li>
-                <li>New research labs inaugurated in the Science Block.</li>
-                <li>Annual Sports Meet scheduled for August 10th.</li>
-            </ul>
-        </section>
+        
     </main>
     <section class="card" id="gallery-section">
         <h2>Gallery</h2>
         <div id="gallery-grid"></div>
     </section>
     <footer>
-        <p>&copy; 2023 Our College. All rights reserved.</p>
+        <p>&copy; 2025 SAMXAIO</p>
+        <div id="visitCounter" style="text-align:center; margin:0.5em auto 0 auto; color:var(--heading); font-size:1.1em;"></div>
     </footer>
     <script src="js/main.js"></script>
 </body>

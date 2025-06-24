@@ -9,6 +9,7 @@
 <body>
     <header>
         <h1>Contact Us</h1>
+        <div id="liveClock" style="font-size:1.1em; color:#fff; margin-top:0.3em;"></div>
         <nav>
             <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
             <ul>
@@ -19,17 +20,54 @@
             </ul>
         </nav>
     </header>
+    
     <main>
+        <div class="container" style="margin-top: 1.5em;">
+        <section class="card" style="padding: 1.5em 1em 1.5em 1em; max-width: 600px; margin: 2em auto 2em auto;">
+            <h2 style="text-align:center; color: var(--heading); margin-bottom: 1em;">Faculty Contact Table</h2>
+            <table class="table" style="background: var(--primary-accent); color: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px var(--gallery-img-shadow);">
+                <thead style="background: var(--header-bg); color: #fff;">
+                    <tr>
+                        <th>Teacher Name</th>
+                        <th>Subject</th>
+                        <th>Teacher Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: var(--secondary-accent);">
+                        <td>Dr. S. Ramesh</td>
+                        <td>Mathematics</td>
+                        <td>9876543210</td>
+                    </tr>
+                    <tr style="background: var(--primary-accent);">
+                        <td>Ms. Priya Sharma</td>
+                        <td>Physics</td>
+                        <td>9123456780</td>
+                    </tr>
+                    <tr style="background: var(--secondary-accent);">
+                        <td>Mr. Anil Kumar</td>
+                        <td>English</td>
+                        <td>9988776655</td>
+                    </tr>
+                    <tr style="background: var(--primary-accent);">
+                        <td>Mrs. Lakshmi Devi</td>
+                        <td>Computer Science</td>
+                        <td>9001122334</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
         <section class="card">
             <h2>Get in Touch</h2>
             <p>If you have any questions, feel free to reach out to us!</p>
             <h3>Contact Information</h3>
-            <p>Phone: (123) 456-7890</p>
-            <p>Email: info@college.edu</p>
+            <p>Phone: +91 9951970441</p>
+            <p>Email: syedsame2244@gmail.com</p>
         </section>
         <section class="card">
             <h3>Contact Form</h3>
-            <form class="contact-form" action="#" method="post">
+            <form class="contact-form" action="https://formspree.io/f/xdkzwlvq" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 
@@ -41,11 +79,29 @@
                 
                 <button type="submit">Send Message</button>
             </form>
+            <!-- Replace yourFormID with your actual Formspree form ID -->
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 College Name. All rights reserved.</p>
+        <p>&copy; 2025 SAMXAIO. </p>
+        <div id="visitCounter" style="text-align:center; margin:0.5em auto 0 auto; color:var(--heading); font-size:1.1em;"></div>
     </footer>
     <script src="js/main.js"></script>
+    <script>
+        // Live clock script
+        function updateClock() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Page visit counter script
+        let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visitCounter').textContent = `Page Visits: ${visitCount}`;
+    </script>
 </body>
 </html>
