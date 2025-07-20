@@ -1,7 +1,7 @@
 // Timetable data for each day
 const timetableData = {
     monday: [
-        [1, '09:00 - 09:50', 'Mathematics'],
+        [1, '09:00 - 09:50', 'andcdkj'],
         [2, '09:50 - 10:40', 'Physics'],
         [3, '10:50 - 11:40', 'Chemistry'],
         [4, '11:40 - 12:30', 'English'],
